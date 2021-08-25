@@ -6,7 +6,8 @@ module.exports = {
         return next(null, {
             statusCode: 200,
             body: JSON.stringify({
-                message: process.env.DIALOGFLOW_PRIVATE_KEY,
+                access_token: process.env.PAGE_ACCESS_TOKEN,
+                verify_token: process.env.VERIFY_TOKEN
             }),
         });
     },
