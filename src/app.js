@@ -22,7 +22,6 @@ module.exports = {
     },
     removeStarted: (res, req, next) => {
         return require('./api/messenger').removeProfile(res, req, next);
-
     },
     setupPersistentMenu: (res, req, next) => {
         return require('./api/messenger').setupPersistentMenu(res, req, next);
