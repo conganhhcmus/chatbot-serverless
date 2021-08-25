@@ -7,7 +7,7 @@ module.exports = {
             statusCode: 200,
             body: JSON.stringify({
                 access_token: process.env.PAGE_ACCESS_TOKEN,
-                verify_token: process.env.VERIFY_TOKEN
+                verify_token: process.env.VERIFY_TOKEN,
             }),
         });
     },
