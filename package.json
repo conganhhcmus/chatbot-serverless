@@ -1,0 +1,26 @@
+{
+    "main": "app.js",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "dialogflow": "^1.2.0",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "request": "^2.88.2"
+    },
+    "scripts": {
+        "start": "NODE_ENV=PROD node ./src/app.js",
+        "dev": "NODE_ENV=DEV node ./src/app.js",
+        "format": "npx prettier --write ./src/",
+        "check": "npx eslint ./src/ && npx prettier --check ./src/ ",
+        "build": "npx babel src -d dist",
+        "test": "echo 'test'"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.15.0",
+        "@babel/eslint-parser": "^7.15.0",
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.7.0",
+        "eslint": "^7.32.0",
+        "prettier": "^2.3.2"
+    }
+}

@@ -1,0 +1,75 @@
+service: chatbot-serverless
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  environment:
+   DIALOGFLOW_PRIVATE_KEY: "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDb9OtEunx8t1lv\n6jIIBPkjvP8Esv+05+PtJsBmsK8JM9EdLYu8++pPXrAyavMvEdfxP1RZSNR++78a\nSjbZRktJwHpdg9CuX5nWiQo/Dwd7crvg4N4hpObKUYWLA75sYLAiknERopmxMiDP\n3lzggaHxolJNtSDsccz3qnKvuuwe7oykcHdJg1hOgnpri8E6Qe4k65ENcquEOUvB\nubHY7DdCsmfof986CptbWZICAOavlAo2v8x7ah3ilMvS/BcvKGpnNbROLSo+XbJA\nTe6W1Lb6ArcCmlkhNVyXqnaNQHAxidIo13bgitVDrC8pRmK9QiYXkXGdIHqTHfPN\nPhO3zCyNAgMBAAECgf92Q+7SqxhEMsnF23G/7Sja/1pbaLYUjxLvQxP0IwvcBPFb\n7BJFitOAUf/UZ1KWdOOI03U7m5LiHWr9qK16vFEKKYLtAVxgKWFgy5mnt5owL4CZ\nLQPoXmd896OK3y0pr0ubw5n48IOUpMjDdDWLF6/7aWnIXm5GWURUXpyW7zWrxVxE\nyCcLS739fzfxS1xL8a9TJPZlh0cG4AeV1MlAf4DDxSMdk7sYAMs6U5Y2yavoFGOt\n7GjfVWXC7MuusSdm8Qvwb0RwexcoKXyQeJdV3BZkUw/uDXcCqpHV3ZFrcBDP6g9o\njkxGK4Ph8p3LBbP1USxtj/qRz9MZwpW+rdmKdnECgYEA9gg5MgH8gKe/sEFgJFIs\nGWkritIfkmGcLi8SVvju075AWUcOxQAg54KwGVl24hzoza+Iuk9M9rPcTGncUk0X\nsywvkrh5gDnlug0Vp75Z433lj1KsmzJ+JrQMtiGBAcsFbodT4Kkz/6tfGRTZH/Ip\nMM0RZlKMXhODxW2WhFQqVVcCgYEA5N4/rVDd/tUH3x5GulSXnaRT1rrZZK8FRTH7\nj1exl26at95479fyOd8clBj2wdv+RNpvW03ZenqzvfPsU5Yug3yJI3XJiy7+blDW\nSrTZ/Cbjv/BfHRqrhQnA/pPjLZuBPDFvWLhwK3yjBe7O6Mq7ZLLQPq72DvxvqWL+\nFcNTGrsCgYEA4ZN4nVkk4fDr1/aY57RPqpy6x3UQbW4BfHa8IfHrR0jQRwrXh9gu\nUxWH0DYuwfIvoSan/epnbmpKOeV1lCAK8sQ4ehWZkO+EqakFid8FG4d6yoXKrCEH\neQTsArGFTteOC2EYjouUmX3Om3h5+shU6+GZam+VM0xBLOrlbj6c8dECgYApQNpP\nfkUVmwaZNBbhnT/a/XTTPsjSui2EBHdophDvz9L5k5NPACi8P7giBcHsvZ++f3UV\nCxpJVnaxpZcSlf56WudJSgDzIpxf/Bg0TRcBuWzR+xzZ3SXPjCuKd9O6M85+sBZ2\n8n/dhtDHz/zhvzE5/HVG5ziZCO2DpcFQ4O1I4wKBgQCQu6Kg84ogE3g3SnVlWkWT\n2BFVs/R5y9toM5I8KEA47INpVodNesu2EfknnChiwa3E8zZwEFuofalLCV7qLHes\nhT5MCgaQ3mDga9vowbNQLIyIlcd2HRaKdbxMYweIdmuXgyINJI7bKrYaN47JknLw\n1L9hQcfaASoEsgGxObaiOA==\n-----END PRIVATE KEY-----\n"
+   DIALOGFLOW_CLIENT_EMAIL: chatbot@newagent-mivp.iam.gserviceaccount.com
+   VERIFY_TOKEN: k17
+   PAGE_ACCESS_TOKEN: EAACqr6vmBTQBAFW6hldHlxNS0tTmTfPj1zuzDYlXbWZB8O2ZAVniIhUZBU2bZAzrEZBeTk2ollty4s1KtxfSDukp6MAuzkiqHL7QwVcJeVxJMoziANbNxV3ndNVccD9ZC9oGk1dMh9tb4WZBneERyVWkD9rRphW73XgZCUdKqR9lfZBiF55o09203
+
+# you can add packaging information here
+#package:
+#  patterns:
+#    - '!exclude-me.js'
+#    - '!exclude-me-dir/**'
+#    - include-me.js
+#    - include-me-dir/**
+
+functions:
+  webhook:
+    handler: src/app.webhook
+    events:
+      - http:
+          path: webhook
+          method: GET
+          integration: lambda
+      - http:
+          path: webhook
+          method: POST
+          integration: lambda
+
+  getStarted:
+    handler: src/app.setupGetStarted
+    events:
+      - http:
+          path: setupGetStarted
+          method: GET
+          integration: lambda
+
+  removeStarted:
+    handler: src/app.removeStarted
+    events:
+      - http:
+          path: removeStarted
+          method: GET
+          integration: lambda
+    
+  setupPersistentMenu:
+    handler: src/app.setupPersistentMenu
+    events:
+      - http:
+          path: setupPersistentMenu
+          method: GET
+          integration: lambda
+
+  removePersistentMenu:
+    handler: src/app.removePersistentMenu
+    events:
+      - http:
+          path: removePersistentMenu
+          method: GET
+          integration: lambda
+
+  hello:
+    handler: src/app.hello
+    events:
+      - http:
+          path: hello
+          method: GET
+          integration: lambda
+
